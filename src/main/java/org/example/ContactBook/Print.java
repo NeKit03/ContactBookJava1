@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Locale;
+
 public class Print {
     static Scanner in = new Scanner(System.in);
     public static void printMenu(){

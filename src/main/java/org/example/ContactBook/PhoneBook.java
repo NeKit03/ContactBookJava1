@@ -2,10 +2,12 @@ package org.example.ContactBook;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.*;
 
 public class PhoneBook {
     private HashMap<String, Contact> contacts;
-
+    private HashMap<Integer, String> contctsSort;
     public PhoneBook() {
         contacts = new HashMap<>();
     }
@@ -31,9 +33,17 @@ public class PhoneBook {
         }
     }
 
+
     public void printContacts() {
-        for (String name : contacts.keySet()) {
-            Contact contact = contacts.get(name);
+        List<Map.Entry<String, Contact>> entryList = new ArrayList<>(contacts.entrySet());
+        Collections.sort(entryList, new Comparator<Map.Entry<String, Contact>>() {
+            @Override
+            public int compare(Map.Entry<String, Contact> o1, Map.Entry<String, Contact> o2) {
+                return o2.getValue().getSize().compareTo(o1.getValue().getSize());
+            }
+        });
+        for (Map.Entry<String, Contact> entry : entryList) {
+            Contact contact = entry.getValue();
             System.out.println("Name: " + contact.getName() + ", Phone Numbers:");
             ArrayList<String> numbers = contact.getPhoneNumber();
             for (int i = 0; i < numbers.size(); i++) {
